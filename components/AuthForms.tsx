@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { AppView } from '../types';
-import { Mail, Lock, User, Users, Shield, Key, Fingerprint, LogIn, UserPlus, RefreshCw, LockIcon } from 'lucide-react';
+import { Mail, Lock, User, Users, Shield, Key, Fingerprint, LogIn, UserPlus, RefreshCw } from 'lucide-react';
 
 interface AuthFormsProps {
   view: AppView;
@@ -27,7 +26,7 @@ const AuthForms: React.FC<AuthFormsProps> = ({ view, colors, onNavigate }) => {
       case 'login': return <LogIn {...props} />;
       case 'register': return <UserPlus {...props} />;
       case 'forgot': return <RefreshCw {...props} />;
-      case 'update': return <LockIcon {...props} />;
+      case 'update': return <Lock {...props} />;
     }
   };
 
