@@ -296,9 +296,10 @@ const App: React.FC = () => {
     appView: 'login',
     emailView: 'confirm',
     displayMode: 'preview',
+    // NEW DEFAULT COLORS: Blue & Cyan Gradient
     colors: {
-      primary: '#a855f7',
-      secondary: '#3b82f6',
+      primary: '#2563eb',   // blue-600
+      secondary: '#06b6d4', // cyan-500
     },
     supabase: {
       url: '',
@@ -388,8 +389,8 @@ const App: React.FC = () => {
 <body class="min-h-screen flex items-center justify-center p-6 py-20 bg-slate-50 relative overflow-x-hidden">
     <!-- Background Decor -->
     <div class="fixed inset-0 pointer-events-none opacity-40 -z-10">
-        <div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-purple-200/50 rounded-full blur-[120px] animate-[fadeIn_2s_ease-out]"></div>
-        <div class="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-blue-200/50 rounded-full blur-[120px] animate-[fadeIn_2s_ease-out_0.5s_backwards]"></div>
+        <div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-blue-200/50 rounded-full blur-[120px] animate-[fadeIn_2s_ease-out]"></div>
+        <div class="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-cyan-200/50 rounded-full blur-[120px] animate-[fadeIn_2s_ease-out_0.5s_backwards]"></div>
     </div>
 
     <div class="w-full max-w-[420px] relative mt-16 mb-8">
@@ -576,7 +577,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex h-screen w-full bg-slate-100">
+    <div className="flex h-screen w-full bg-slate-50">
       <Sidebar 
         state={state} 
         updateState={updateState} 
@@ -585,10 +586,10 @@ const App: React.FC = () => {
       />
       
       <main className="flex-1 flex flex-col relative overflow-hidden">
-        {/* Background Decor */}
+        {/* Background Decor - Updated to Blue/Cyan */}
         <div className="absolute inset-0 pointer-events-none opacity-40">
-          <div className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-purple-200/50 rounded-full blur-[120px]"></div>
-          <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-blue-200/50 rounded-full blur-[120px]"></div>
+          <div className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-blue-200/50 rounded-full blur-[120px]"></div>
+          <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-cyan-200/50 rounded-full blur-[120px]"></div>
         </div>
 
         {/* Toolbar */}
@@ -600,7 +601,7 @@ const App: React.FC = () => {
                   key={v}
                   onClick={() => updateState({ appView: v })}
                   className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
-                    state.appView === v ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:bg-white/50'
+                    state.appView === v ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:bg-white/50'
                   }`}
                 >
                   {v.charAt(0).toUpperCase() + v.slice(1)}
@@ -612,7 +613,7 @@ const App: React.FC = () => {
                   key={v}
                   onClick={() => updateState({ emailView: v })}
                   className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
-                    state.emailView === v ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:bg-white/50'
+                    state.emailView === v ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:bg-white/50'
                   }`}
                 >
                   {v.charAt(0).toUpperCase() + v.slice(1)}
@@ -625,7 +626,7 @@ const App: React.FC = () => {
             <button 
               onClick={() => updateState({ displayMode: 'preview' })}
               className={`px-3 py-1.5 rounded-md text-[10px] font-bold flex items-center gap-2 transition-all ${
-                state.displayMode === 'preview' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:bg-white/50'
+                state.displayMode === 'preview' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:bg-white/50'
               }`}
             >
               <Eye size={14} /> Vista
@@ -633,7 +634,7 @@ const App: React.FC = () => {
             <button 
               onClick={() => updateState({ displayMode: 'code' })}
               className={`px-3 py-1.5 rounded-md text-[10px] font-bold flex items-center gap-2 transition-all ${
-                state.displayMode === 'code' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:bg-white/50'
+                state.displayMode === 'code' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:bg-white/50'
               }`}
             >
               <Code size={14} /> Código
@@ -692,7 +693,7 @@ const App: React.FC = () => {
       {/* Info Badge */}
       <div className="fixed bottom-4 right-4 z-50">
         <div className="bg-white/90 backdrop-blur border border-slate-200 rounded-full px-4 py-2 shadow-xl flex items-center gap-2 text-[10px] font-bold text-slate-500">
-          <Info size={12} className="text-indigo-500" />
+          <Info size={12} className="text-blue-500" />
           Powered by Sávika AI Engine v3.1
         </div>
       </div>
