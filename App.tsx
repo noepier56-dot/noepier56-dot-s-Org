@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   AppState, 
@@ -10,7 +9,6 @@ import Sidebar from './components/Sidebar';
 import AuthForms from './components/AuthForms';
 import EmailTemplates, { generateEmailHTML } from './components/EmailTemplates';
 import { Eye, Code, CheckCircle, Info, Copy } from 'lucide-react';
-import { generateSmartCopy } from './services/gemini';
 
 // --- Code Generation for Auth Views ---
 const generateAuthHTML = (view: AppView, colors: { primary: string; secondary: string }) => {
@@ -336,13 +334,6 @@ const App: React.FC = () => {
     }, 1000);
   };
 
-  const handleGenerateAI = async () => {
-    addLog("Consultando IA para optimización...", "info");
-    const suggestion = await generateSmartCopy(state.appView, state.colors);
-    addLog("IA: Sugerencia generada", "info");
-    alert(`Sugerencia de Sávika IA:\n\n${suggestion}`);
-  };
-
   const handleExport = () => {
     addLog("Compilando sistema completo para producción...", "info");
     
@@ -591,7 +582,6 @@ const App: React.FC = () => {
         updateState={updateState} 
         onExport={handleExport}
         onConnect={handleConnect}
-        onGenerateAI={handleGenerateAI}
       />
       
       <main className="flex-1 flex flex-col relative overflow-hidden">

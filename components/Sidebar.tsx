@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { AppState, MainMode } from '../types';
+import { AppState } from '../types';
 import { 
   Download, 
   Settings, 
@@ -17,10 +16,9 @@ interface SidebarProps {
   updateState: (update: Partial<AppState>) => void;
   onExport: () => void;
   onConnect: () => void;
-  onGenerateAI: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConnect, onGenerateAI }) => {
+const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConnect }) => {
   return (
     <aside className="w-80 bg-slate-900 text-slate-300 flex-shrink-0 flex flex-col border-r border-slate-800 z-30 shadow-2xl h-full">
       <div className="p-6 border-b border-slate-800">
@@ -116,12 +114,6 @@ const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConne
                 />
               </div>
             </div>
-            <button 
-              onClick={onGenerateAI}
-              className="w-full py-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 text-[10px] font-bold border border-indigo-500/30 transition-all flex items-center justify-center gap-2"
-            >
-              ✨ Sugerencia con IA
-            </button>
           </div>
         </section>
 
