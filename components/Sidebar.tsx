@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppState } from '../types';
 import { 
   Download, 
@@ -8,7 +8,9 @@ import {
   Mail, 
   Zap, 
   Terminal,
-  Database
+  Database,
+  ChevronUp,
+  ChevronDown
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -19,14 +21,16 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConnect }) => {
+  const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+
   return (
-    <aside className="w-80 bg-white text-slate-600 flex-shrink-0 flex flex-col border-r border-slate-200 z-30 shadow-2xl h-full">
+    <aside className="w-80 bg-white text-slate-600 flex-shrink-0 flex flex-col border-r border-slate-200 z-30 shadow-2xl h-full font-sans">
       <div className="p-6 border-b border-slate-100">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">S</div>
           <div>
-            <h2 className="text-slate-800 font-bold text-lg leading-none">Sávika DevKit</h2>
-            <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">Auth & Design Suite</p>
+            <h2 className="text-slate-800 font-bold text-lg leading-none tracking-tight">Sávika DevKit</h2>
+            <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-widest font-medium">Auth & Design Suite</p>
           </div>
         </div>
       </div>
@@ -39,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConne
           </h3>
           <button 
             onClick={onExport}
-            className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 group"
+            className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 group border border-emerald-400/20"
           >
             <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
             Exportar .html
@@ -58,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConne
             <button 
               onClick={() => updateState({ mainMode: 'app' })}
               className={`w-full text-left px-4 py-3 rounded-xl transition-all flex items-center gap-3 ${
-                state.mainMode === 'app' ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-100' : 'hover:bg-slate-50 text-slate-500'
+                state.mainMode === 'app' ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-100 shadow-sm' : 'hover:bg-slate-50 text-slate-600 hover:text-slate-900'
               }`}
             >
               <Settings size={18} /> App Login
@@ -66,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConne
             <button 
               onClick={() => updateState({ mainMode: 'email' })}
               className={`w-full text-left px-4 py-3 rounded-xl transition-all flex items-center gap-3 ${
-                state.mainMode === 'email' ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-100' : 'hover:bg-slate-50 text-slate-500'
+                state.mainMode === 'email' ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-100 shadow-sm' : 'hover:bg-slate-50 text-slate-600 hover:text-slate-900'
               }`}
             >
               <Mail size={18} /> Email Templates
@@ -128,14 +132,14 @@ const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConne
               placeholder="Project URL"
               value={state.supabase.url}
               onChange={(e) => updateState({ supabase: { ...state.supabase, url: e.target.value }})}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-[10px] text-slate-600 font-mono placeholder-slate-400 focus:outline-none focus:border-blue-500" 
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-[10px] text-slate-600 font-mono placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all" 
             />
             <input 
               type="password" 
               placeholder="Anon Key" 
               value={state.supabase.key}
               onChange={(e) => updateState({ supabase: { ...state.supabase, key: e.target.value }})}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-[10px] text-slate-600 font-mono placeholder-slate-400 focus:outline-none focus:border-blue-500" 
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-[10px] text-slate-600 font-mono placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all" 
             />
             <button 
               onClick={onConnect}
@@ -152,22 +156,29 @@ const Sidebar: React.FC<SidebarProps> = ({ state, updateState, onExport, onConne
         </section>
       </div>
       
-      {/* Console Log */}
-      <div className="p-4 bg-slate-900 border-t border-slate-800">
-        <h4 className="text-[10px] font-bold text-slate-500 mb-2 flex items-center gap-2">
-          <Terminal size={12} /> Consola del Sistema
-        </h4>
-        <div className="font-mono text-[9px] h-32 overflow-y-auto space-y-1 text-slate-400 leading-relaxed scrollbar-hide">
-          {state.logs.map(log => (
-            <div key={log.id} className={
-              log.type === 'error' ? 'text-red-400' : 
-              log.type === 'success' ? 'text-emerald-400' : 'text-slate-400'
-            }>
-              <span className="opacity-50">[{log.timestamp.split('T')[1].split('.')[0]}]</span> {log.message}
-            </div>
-          ))}
-          {state.logs.length === 0 && <div className="italic opacity-30">Esperando eventos...</div>}
-        </div>
+      {/* Console Log - Collapsible */}
+      <div className="bg-slate-50 border-t border-slate-200 transition-all duration-300">
+        <button 
+          onClick={() => setIsConsoleOpen(!isConsoleOpen)}
+          className="w-full p-3 flex items-center justify-between text-[10px] font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+        >
+          <span className="flex items-center gap-2 uppercase tracking-wider"><Terminal size={12} /> Consola del Sistema</span>
+          {isConsoleOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
+        </button>
+        
+        {isConsoleOpen && (
+          <div className="px-4 pb-4 font-mono text-[10px] h-32 overflow-y-auto space-y-1 text-slate-500 leading-relaxed scrollbar-hide bg-slate-50 border-t border-slate-100 inner-shadow">
+            {state.logs.map(log => (
+              <div key={log.id} className={
+                log.type === 'error' ? 'text-red-500' : 
+                log.type === 'success' ? 'text-emerald-600' : 'text-slate-500'
+              }>
+                <span className="opacity-50">[{log.timestamp.split('T')[1].split('.')[0]}]</span> {log.message}
+              </div>
+            ))}
+            {state.logs.length === 0 && <div className="italic opacity-40 text-center py-2">Sin eventos recientes</div>}
+          </div>
+        )}
       </div>
     </aside>
   );

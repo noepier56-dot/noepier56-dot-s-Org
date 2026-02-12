@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { EmailView } from '../types';
 
@@ -83,7 +82,7 @@ export const generateEmailHTML = (view: EmailView, colors: { primary: string; se
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>${title}</title>
   <style type="text/css">
-    body { width: 100% !important; height: 100% !important; margin: 0; padding: 0; background-color: #f1f5f9; font-family: 'Plus Jakarta Sans', 'Segoe UI', Helvetica, Arial, sans-serif; }
+    body { width: 100% !important; height: 100% !important; margin: 0; padding: 0; background-color: #f1f5f9; font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; }
     .wrapper { width: 100%; table-layout: fixed; background-color: #f1f5f9; padding: 40px 0; }
     .main-table { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 500px; border-radius: 24px; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); overflow: hidden; border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     

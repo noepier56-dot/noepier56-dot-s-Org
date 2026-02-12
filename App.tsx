@@ -36,10 +36,10 @@ const generateAuthHTML = (view: AppView, colors: { primary: string; secondary: s
                 <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl border-4 border-white bg-white relative group overflow-hidden">
                     <!-- Strong colored frame -->
                     <div class="absolute inset-0 rounded-xl border-[3px]" style="border-color: ${primary}; background-color: ${primary}08;"></div>
-                    <span class="text-4xl font-extrabold tracking-tighter relative z-10" style="${gradText}">SK</span>
+                    <span class="text-4xl font-extrabold tracking-tighter relative z-10 font-sans" style="${gradText}">SK</span>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-800">{{TITLE}}</h2>
-                <p class="text-slate-400 text-sm mt-2">{{SUBTITLE}}</p>
+                <h2 class="text-2xl font-bold text-slate-800 tracking-tight">{{TITLE}}</h2>
+                <p class="text-slate-500 text-sm mt-2">{{SUBTITLE}}</p>
             </div>`;
 
   let innerContent = '';
@@ -135,7 +135,7 @@ const generateAuthHTML = (view: AppView, colors: { primary: string; secondary: s
   }
 
   return `<div class="auth-container">
-  <div class="w-full max-w-[420px] relative mx-auto mt-16 mb-8 animate-enter">
+  <div class="w-full max-w-[420px] relative mx-auto mt-16 mb-8 animate-enter font-sans">
       <!-- Floating Badge -->
       <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-3xl bg-white flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-100 z-30 transition-transform hover:scale-110 duration-300">
           <i data-lucide="${getIconName(view)}" width="32" height="32" style="color: ${primary}"></i>
@@ -296,10 +296,10 @@ const App: React.FC = () => {
     appView: 'login',
     emailView: 'confirm',
     displayMode: 'preview',
-    // NEW DEFAULT COLORS: Blue & Cyan Gradient
+    // PROFESSIONAL BLUE PALETTE (Solid & Trustworthy)
     colors: {
-      primary: '#2563eb',   // blue-600
-      secondary: '#06b6d4', // cyan-500
+      primary: '#3b82f6',   // blue-500: Vibrant but professional
+      secondary: '#06b6d4', // cyan-500: Modern accent
     },
     supabase: {
       url: '',
@@ -348,7 +348,7 @@ const App: React.FC = () => {
     <title>Sávika IA - Autenticación</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: ${primary};
@@ -356,8 +356,9 @@ const App: React.FC = () => {
             --grad: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
+            -webkit-font-smoothing: antialiased;
         }
         .grad-text {
             background: var(--grad);
@@ -393,7 +394,7 @@ const App: React.FC = () => {
         <div class="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-cyan-200/50 rounded-full blur-[120px] animate-[fadeIn_2s_ease-out_0.5s_backwards]"></div>
     </div>
 
-    <div class="w-full max-w-[420px] relative mt-16 mb-8">
+    <div class="w-full max-w-[420px] relative mt-16 mb-8 font-sans">
         
         <!-- LOGIN VIEW -->
         <div id="view-login" class="auth-view active">
@@ -409,17 +410,17 @@ const App: React.FC = () => {
                             <div class="absolute inset-0 border-[3px] rounded-xl" style="border-color: var(--primary); background-color: ${primary}08;"></div>
                             <span class="font-extrabold text-4xl grad-text relative z-10">SK</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-slate-800">¡Hola de nuevo!</h2>
-                        <p class="text-slate-400 text-sm mt-2">Ingresa tus credenciales para continuar.</p>
+                        <h2 class="text-2xl font-bold text-slate-800 tracking-tight">¡Hola de nuevo!</h2>
+                        <p class="text-slate-500 text-sm mt-2">Ingresa tus credenciales para continuar.</p>
                     </div>
                     <form onsubmit="event.preventDefault(); alert('Lógica de login conectada');" class="space-y-5">
                         <div class="relative group">
                             <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="email" placeholder="ejemplo@educacion.ec" required class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-indigo-500 transition-all outline-none">
+                            <input type="email" placeholder="ejemplo@educacion.ec" required class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-indigo-500 transition-all outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <div class="relative group">
                             <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="password" placeholder="••••••••" required class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-indigo-500 transition-all outline-none">
+                            <input type="password" placeholder="••••••••" required class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-indigo-500 transition-all outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <div class="flex justify-end">
                             <button type="button" onclick="showView('forgot')" class="text-xs font-bold grad-text hover:opacity-80">¿Olvidaste tu contraseña?</button>
@@ -445,31 +446,31 @@ const App: React.FC = () => {
                             <div class="absolute inset-0 border-[3px] rounded-xl" style="border-color: var(--primary); background-color: ${primary}08;"></div>
                             <span class="font-extrabold text-4xl grad-text relative z-10">SK</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-slate-800">Únete a Sávika</h2>
-                        <p class="text-slate-400 text-sm mt-2">Asistente inteligente para educadores.</p>
+                        <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Únete a Sávika</h2>
+                        <p class="text-slate-500 text-sm mt-2">Asistente inteligente para educadores.</p>
                     </div>
                     <form onsubmit="event.preventDefault();" class="space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="relative group">
                                 <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 input-icon group-hover:opacity-100 transition-opacity"></i>
-                                <input type="text" placeholder="Nombre" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 outline-none text-sm">
+                                <input type="text" placeholder="Nombre" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 outline-none text-sm text-slate-900 placeholder-slate-400">
                             </div>
                             <div class="relative group">
                                 <i data-lucide="users" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 input-icon group-hover:opacity-100 transition-opacity"></i>
-                                <input type="text" placeholder="Apellido" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 outline-none text-sm">
+                                <input type="text" placeholder="Apellido" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 outline-none text-sm text-slate-900 placeholder-slate-400">
                             </div>
                         </div>
                         <div class="relative group">
                             <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="email" placeholder="Correo Electrónico" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none">
+                            <input type="email" placeholder="Correo Electrónico" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <div class="relative group">
                             <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="password" placeholder="Contraseña" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none">
+                            <input type="password" placeholder="Contraseña" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <div class="relative group">
                             <i data-lucide="shield" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="password" placeholder="Confirmar" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none">
+                            <input type="password" placeholder="Confirmar" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <button type="submit" class="w-full py-4 rounded-xl text-white font-bold text-sm grad-bg shadow-lg hover:scale-[1.02] hover:shadow-indigo-500/25 transition-all">Crear Cuenta</button>
                     </form>
@@ -492,13 +493,13 @@ const App: React.FC = () => {
                             <div class="absolute inset-0 border-[3px] rounded-xl" style="border-color: var(--primary); background-color: ${primary}08;"></div>
                             <span class="font-extrabold text-4xl grad-text relative z-10">SK</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-slate-800">Recuperar Acceso</h2>
-                        <p class="text-slate-400 text-sm mt-2">Enviaremos un enlace a tu correo.</p>
+                        <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Recuperar Acceso</h2>
+                        <p class="text-slate-500 text-sm mt-2">Enviaremos un enlace a tu correo.</p>
                     </div>
                     <form onsubmit="event.preventDefault();" class="space-y-6">
                         <div class="relative group">
                             <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="email" placeholder="Tu correo registrado" class="w-full pl-12 pr-5 py-4 rounded-xl bg-slate-50 outline-none">
+                            <input type="email" placeholder="Tu correo registrado" class="w-full pl-12 pr-5 py-4 rounded-xl bg-slate-50 outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <button type="submit" class="w-full py-4 rounded-xl text-white font-bold text-sm grad-bg shadow-lg hover:scale-[1.02] hover:shadow-indigo-500/25 transition-all">Enviar Enlace</button>
                     </form>
@@ -521,17 +522,17 @@ const App: React.FC = () => {
                             <div class="absolute inset-0 border-[3px] rounded-xl" style="border-color: var(--primary); background-color: ${primary}08;"></div>
                             <span class="font-extrabold text-4xl grad-text relative z-10">SK</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-slate-800">Nueva Contraseña</h2>
-                        <p class="text-slate-400 text-sm mt-2">Define una clave segura.</p>
+                        <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Nueva Contraseña</h2>
+                        <p class="text-slate-500 text-sm mt-2">Define una clave segura.</p>
                     </div>
                     <form onsubmit="event.preventDefault();" class="space-y-5">
                         <div class="relative group">
                             <i data-lucide="key" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="password" placeholder="Nueva contraseña" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none">
+                            <input type="password" placeholder="Nueva contraseña" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <div class="relative group">
                             <i data-lucide="fingerprint" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 input-icon group-hover:opacity-100 transition-opacity"></i>
-                            <input type="password" placeholder="Confirmar contraseña" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none">
+                            <input type="password" placeholder="Confirmar contraseña" class="w-full pl-12 pr-5 py-3.5 rounded-xl bg-slate-50 outline-none text-slate-900 placeholder-slate-400">
                         </div>
                         <button type="submit" class="w-full py-4 rounded-xl text-white font-bold text-sm grad-bg shadow-lg hover:scale-[1.02] hover:shadow-indigo-500/25 transition-all">Actualizar Contraseña</button>
                     </form>
@@ -577,7 +578,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex h-screen w-full bg-slate-50">
+    <div className="flex h-screen w-full bg-slate-50 font-sans">
       <Sidebar 
         state={state} 
         updateState={updateState} 
@@ -586,7 +587,7 @@ const App: React.FC = () => {
       />
       
       <main className="flex-1 flex flex-col relative overflow-hidden">
-        {/* Background Decor - Updated to Blue/Cyan */}
+        {/* Background Decor - Blue/Cyan */}
         <div className="absolute inset-0 pointer-events-none opacity-40">
           <div className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-blue-200/50 rounded-full blur-[120px]"></div>
           <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-cyan-200/50 rounded-full blur-[120px]"></div>
